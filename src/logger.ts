@@ -2,46 +2,46 @@
 // Ensures stdout is kept clean for JSON-RPC messages by routing all logs to stderr
 // This follows the pattern used by other CLI tools that need to maintain clean stdout
 export class McpLogger {
-  private prefix: string;
-  private silent: boolean;
+    private prefix: string;
+    private silent: boolean;
 
-  constructor(prefix: string = '', silent: boolean = false) {
-    this.prefix = prefix ? `[${prefix}] ` : '';
-    this.silent = silent || process.env.LOG_ENABLED === 'true';
-  }
-
-  info(...args: unknown[]): void {
-    if (!this.silent) {
-      console.error(`${this.prefix}INFO:`, ...args)
+    constructor(prefix: string = '', silent: boolean = false) {
+        this.prefix = prefix ? `[${prefix}] ` : '';
+        this.silent = silent || process.env.LOG_ENABLED === 'true';
     }
-  }
 
-  debug(...args: unknown[]): void {
-    if (!this.silent) {
-      console.error(`${this.prefix}DEBUG:`, ...args)
+    info(...args: unknown[]): void {
+        if (!this.silent) {
+            console.error(`${this.prefix}INFO:`, ...args)
+        }
     }
-  }
 
-  warn(...args: unknown[]): void {
-    if (!this.silent) {
-      console.error(`${this.prefix}WARN:`, ...args)
+    debug(...args: unknown[]): void {
+        if (!this.silent) {
+            console.error(`${this.prefix}DEBUG:`, ...args)
+        }
     }
-  }
 
-  error(...args: unknown[]): void {
-  // Always log errors, even in silent mode
-    console.error(`${this.prefix}ERROR:`, ...args);
-  }
+    warn(...args: unknown[]): void {
+        if (!this.silent) {
+            console.error(`${this.prefix}WARN:`, ...args)
+        }
+    }
 
-  // Create a child logger with a new prefix
-  child(prefix: string): McpLogger {
-    return new McpLogger(prefix, this.silent)
-  }
+    error(...args: unknown[]): void {
+        // Always log errors, even in silent mode
+        console.error(`${this.prefix}ERROR:`, ...args);
+    }
 
-  // Set silent mode
-  setSilent(silent: boolean): void {
-    this.silent = silent;
-  }
+    // Create a child logger with a new prefix
+    child(prefix: string): McpLogger {
+        return new McpLogger(prefix, this.silent)
+    }
+
+    // Set silent mode
+    setSilent(silent: boolean): void {
+        this.silent = silent;
+    }
 }
 
 // Check if we're running as an MCP server

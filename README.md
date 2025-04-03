@@ -21,7 +21,7 @@ The MCP server that provides GitHub repository information including file conten
 
 ```bash
 # Install from npm
-npm install github-explorer-mcp -g
+npm install @trishchuk/github-explorer-mcp -g
 
 # Run the server (stdio mode for MCP clients)
 github-explorer-mcp
@@ -51,7 +51,7 @@ Add to your Claude Desktop configuration:
   "mcpServers": {
     "github-explorer": {
       "command": "npx",
-      "args": ["github-explorer-mcp"]
+      "args": ["-y", "@trishchuk/github-explorer-mcp"]
     }
   }
 }
@@ -66,7 +66,7 @@ Add to your Cursor configuration:
   "mcpServers": {
     "github-explorer": {
       "command": "npx",
-      "args": ["github-explorer-mcp"]
+      "args": ["-y", "@trishchuk/github-explorer-mcp"]
     }
   }
 }
@@ -146,7 +146,7 @@ Get a diff between two branches or commits.
 
 ```bash
 # Clone the repository
-git clone https://github.com/username/github-explorer-mcp.git
+git clone https://github.com/x51xxx/github-explorer-mcp.git
 cd github-explorer-mcp
 
 # Install dependencies
@@ -155,9 +155,6 @@ npm install
 # IMPORTANT: This project requires Node.js 18 or later
 # If using nvm, run:
 nvm use
-
-# Run in development mode (HTTP/SSE)
-npm run start:sse
 
 # Build the project
 npm run build
